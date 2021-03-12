@@ -15,7 +15,13 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
+            $table->string('url');
+            //relaciones poliformicas
+            //morphs creaar dos campos : ID y la  Entidad
+            //debe de terminar en tamle - imagetable
+            $table->morphs('imagetable');
             $table->timestamps();
+
         });
     }
 

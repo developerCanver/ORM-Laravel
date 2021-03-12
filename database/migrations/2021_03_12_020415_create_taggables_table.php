@@ -15,7 +15,17 @@ class CreateTaggablesTable extends Migration
     {
         Schema::create('taggables', function (Blueprint $table) {
             $table->id();
+            //relaciones poliformicas
+            //morphs creaar dos campos : ID y la  Entidad
+            //debe de terminar en tamle - commentable
+            $table->morphs('commentable');
+
+            $table->bigInteger('tag_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('tag_id')->references('id')->on('tags')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

@@ -15,7 +15,19 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->text('body');
+            //relaciones poliformicas
+            //morphs creaar dos campos : ID y la  Entidad
+            //debe de terminar en tamle - commentable
+            $table->morphs('commentable');
+
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
         });
     }
 
